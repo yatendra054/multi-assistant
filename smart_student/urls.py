@@ -1,0 +1,11 @@
+from django.urls import path
+from .views import*
+
+
+urlpatterns = [
+    path('',login_page,name="login_page"),
+    path('logout/', logout_page, name='logout_page'),
+    path('smart/',smart,name="smart"),
+    path("clear_chat/", clear_chat, name="clear_chat")
+
+]
