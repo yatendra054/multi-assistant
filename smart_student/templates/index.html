@@ -35,7 +35,7 @@
       <form action="{% url 'smart' %}" method="post">
         {% csrf_token %}
         <label for="password_key" class="form-label">GROQ API KEY</label>
-        <input name="password_key" required type="password" class="form-control">
+        <input name="password_key" required type="password" class="form-control" placeholder="Groq key valid upto 24 hours">
         <button type= "submit" class="btn btn-primary w-50"> Enter</button>
       </form>
 

@@ -11,6 +11,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from langchain_community.document_loaders.url import UnstructuredURLLoader
 import os
 import requests
+import google.generativeai as genai
 import json
 from pathlib import Path
 import re
@@ -64,8 +65,11 @@ def handle_llm_model(request,api_key):
                     context["output"] = result
 
                 except Exception as e:
-                    context["output"]=f"Error {str(e)}"
+                    context["output"]=e.response.json()["error"]["message"]
             elif query_type == "summary":
+                google_api_key=os.environ.get('Google_API_KEY')
+                genai.configure(api_key=google_api_key)
+                
                 def get_video_id(url):
                     pattern = r"(?:v=|\/)([0-9A-Za-z_-]{11}).*"
                     match = re.search(pattern, url)
@@ -76,16 +80,18 @@ def handle_llm_model(request,api_key):
                 def extract_transcript_details(youtube_video_url):
                     try:
                         video_id = get_video_id(youtube_video_url)
-                        transcript_text = YouTubeTranscriptApi.get_transcript(video_id, languages=['hi'])
+                        transcript_text = YouTubeTranscriptApi.get_transcript(video_id, languages=['hi','en'])
                         transcript = " ".join([i["text"] for i in transcript_text])
                         return transcript
                     except Exception as e:
                         raise e
 
                 def generate_groq_content(transcript_text, prompt):
-                    llm_model = ChatGroq(groq_api_key=api_key, model="Gemma2-9b-it")
-                    response = llm_model.invoke(prompt + transcript_text)
-                    return response.content
+                    llm_model =  genai.GenerativeModel("models/gemini-2.5-pro")
+                    response = llm_model.generate_content(prompt + transcript_text)
+                    return response.text 
+                    # response = llm_model.invoke(prompt + transcript_text)
+                    # return response.content
 
                 url = request.POST.get("url")
 
@@ -125,9 +131,11 @@ def handle_llm_model(request,api_key):
                             input_variables=["text"]
                         )
 
-                        llm_model = ChatGroq(groq_api_key=api_key, model="Gemma2-9b-it")
-                        chain = load_summarize_chain(llm_model, chain_type="stuff", prompt=prompt_template)
-                        summary = chain.run(doc)
+                        llm_model = genai.GenerativeModel("models/gemini-2.5-pro")
+                        content_text = doc[0].page_content if doc else ""
+                        summary = llm_model.generate_content(prompt_template.format(text=content_text)).text
+                        # chain = load_summarize_chain(llm_model, chain_type="stuff", prompt=prompt_template)
+                        # summary = chain.run(doc)
 
                     if summary:
                         chat_history = request.session.get("chat_history", [])
@@ -138,7 +146,7 @@ def handle_llm_model(request,api_key):
                         context["chat_history"] = chat_history
 
                 except Exception as e:
-                    context["output"] = f"Error: {str(e)}"
+                    context["output"]=str(e)
 
             else:
                 prompt_response=request.POST.get("code-query")
@@ -167,7 +175,7 @@ def handle_llm_model(request,api_key):
                     context["chat_history_display"] = formatted_history
                            
                 except Exception as e:
-                    context["output"]=f"Error:{str(e)}"
+                    context["output"]=e.response.json()["error"]["message"]
                     
             
     return context        
