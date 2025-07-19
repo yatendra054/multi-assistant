@@ -1,11 +1,14 @@
 #!/bin/sh
 
 # Default values if env vars not set
-DB_HOST=${DB_HOST:-db}
-DB_PORT=${DB_PORT:-3306}
+HOST=${HOST}
+PORT=${PORT}
 
-echo "Waiting for database at $DB_HOST:$DB_PORT..."
-while ! nc -z "$DB_HOST" "$DB_PORT"; do
+echo "ENV HOST: $HOST"
+echo "ENV PORT: $PORT"
+
+echo "Waiting for database at $HOST:$PORT..."
+while ! nc -z "$HOST" "$PORT"; do
   sleep 1
 done
 

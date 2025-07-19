@@ -8,22 +8,6 @@ services:
       - .:/app
     ports:
       - "8000:8000"
-    depends_on:
-      - db
     env_file:
       - .env
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_ROOT_PASSWORD: ${PASSWORD}  
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-volumes:
-  mysql_data:
