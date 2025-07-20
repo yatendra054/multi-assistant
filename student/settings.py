@@ -91,6 +91,8 @@ ASGI_APPLICATION = "student.asgi.application"
 # }
 
 USE_SQLITE=os.environ.get("USE_SQLITE","False")=="True"
+if os.getenv("RENDER"):
+    os.system(f"python manage.py runserver 0.0.0.0:{os.environ['PORT']}")
 
 if USE_SQLITE:
     DATABASES = {
