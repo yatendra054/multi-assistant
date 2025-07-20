@@ -90,32 +90,32 @@ ASGI_APPLICATION = "student.asgi.application"
 #     }
 # }
 
-USE_SQLITE=os.environ.get("USE_SQLITE","False")=="True"
+# USE_SQLITE=os.environ.get("USE_SQLITE","False")=="True"
 if os.getenv("RENDER"):
     os.system(f"python manage.py runserver 0.0.0.0:{os.environ['PORT']}")
 
-if USE_SQLITE:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-   }
+# if USE_SQLITE:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": BASE_DIR / "db.sqlite3",
+#         }
+#    }
     
-else :
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ.get("DATABASE_NAME"),
-            "USER": os.environ.get("DATABASE_USER"),
-            "PASSWORD": os.environ.get("PASSWORD"),
-            "HOST": os.environ.get("HOST"),  
-            "PORT": os.environ.get("PORT"),
-            "OPTIONS": {
-                "sslmode": "require"
-            }
+# else :
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DATABASE_NAME"),
+        "USER": os.environ.get("DATABASE_USER"),
+        "PASSWORD": os.environ.get("PASSWORD"),
+        "HOST": os.environ.get("HOST"),  
+        "PORT": os.environ.get("PORT"),
+        "OPTIONS": {
+            "sslmode": "require"
         }
     }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
