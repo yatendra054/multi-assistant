@@ -42,7 +42,7 @@ def handle_llm_model(request,api_key):
                     
                     search = Tool(
                         name="SerpAPI",
-                        func=SerpAPIWrapper().run,
+                        func=SerpAPIWrapper(serpapi_api_key=os.environ.get('SERPAPI_API_KEY')).run,
                         description="Search the web using SerpAPI"
                     )
                     
@@ -65,7 +65,7 @@ def handle_llm_model(request,api_key):
                     context["output"] = result
 
                 except Exception as e:
-                    context["output"]=e.response.json()["error"]["message"]
+                    context["output"]=f"(str{e})"
             elif query_type == "summary":
                 google_api_key=os.environ.get('Google_API_KEY')
                 genai.configure(api_key=google_api_key)
@@ -175,7 +175,7 @@ def handle_llm_model(request,api_key):
                     context["chat_history_display"] = formatted_history
                            
                 except Exception as e:
-                    context["output"]=e.response.json()["error"]["message"]
+                    context["output"]=f"(str{e})"
                     
             
     return context        
