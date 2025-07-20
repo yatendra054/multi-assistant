@@ -51,7 +51,6 @@ Django==5.2.4
 docker==7.1.0
 docstring_parser==0.16
 durationpy==0.10
-embedchain==0.1.128
 emoji==2.14.1
 et_xmlfile==2.0.0
 exceptiongroup==1.2.2

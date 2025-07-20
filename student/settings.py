@@ -82,7 +82,6 @@ ASGI_APPLICATION = "student.asgi.application"
 
 
 
-
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
