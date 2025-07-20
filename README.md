@@ -30,7 +30,6 @@ To ensure user privacy, the application allows users to **enter their Groq API k
 - **Backend**: Django (Python)
 - **LLM Framework**: LangChain
 - **LLM Provider**: Groq API
-- **Frontend**: HTML, JavaScript, Bootstrap
 - **Environment Management**: `.env` for secure variables
 - **Deployment**: Docker (optional but recommended)
 
