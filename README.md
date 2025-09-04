@@ -1,6 +1,6 @@
 # 🧠 Multi Assistant Web App
 
-A **multi-functional assistant platform** built using **Django**, **Langchain**, and **Groq LLM API**, designed to simplify day-to-day tasks like summarizing search results, extracting insights from YouTube videos, and providing coding assistance.
+A **multi-functional assistant platform** built using **Django**, **Langchain**, and **Groq LLM API**, designed to simplify day-to-day tasks like summarizing search results, extracting insights from videos and Websites, and providing coding assistance.
 
 ---
 
