@@ -1,22 +1,22 @@
-# 🧠 Multi Assistant Web App
+# Multi Assistant Web App
 
 A **multi-functional assistant platform** built using **Django**, **Langchain**, and **Groq LLM API**, designed to simplify day-to-day tasks like summarizing search results, extracting insights from videos and Websites, and providing coding assistance.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🔍 **Search**: Ask any question or perform a search — the assistant returns intelligent, summarized answers using LLMs.
-- 📺 **YouTube Video Insights**: Extracts meaningful summaries from YouTube videos using transcript analysis.
-- 💻 **Coding Assistance**: Helps solve programming problems with natural language prompts.
+- **Search**: Ask any question or perform a search — the assistant returns intelligent, summarized answers using LLMs.
+- **YouTube Video Insights**: Extracts meaningful summaries from YouTube videos using transcript analysis.
+- **Coding Assistance**: Helps solve programming problems with natural language prompts.
 
 ---
 
-## 🔐 Secure API Key Flow
+## Secure API Key Flow
 
 To ensure user privacy, the application allows users to **enter their Groq API key** after logging in. This API key is **not stored** in any database or backend.
 
-### 🔑 Groq API Setup
+### Groq API Setup
 1. Go to the [Groq Developer Portal](https://console.groq.com/developer).
 2. Sign up or log in.
 3. Navigate to the **"API Keys"** section.
@@ -25,7 +25,7 @@ To ensure user privacy, the application allows users to **enter their Groq API k
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Backend**: Django (Python)
 - **LLM Framework**: LangChain
@@ -35,7 +35,7 @@ To ensure user privacy, the application allows users to **enter their Groq API k
 
 ---
 
-## 🐳 Docker Support
+## Docker Support
 
 The app can be easily containerized using Docker. A Docker image includes all required dependencies for smooth deployment.
 
