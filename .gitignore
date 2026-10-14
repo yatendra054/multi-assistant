@@ -1,6 +1,16 @@
 
 .env
-.env_sample
+.env.sample
 db.sqlite3
 db/
 /staticfiles/
+
+# Python cache
+smart_student/__pycache__/
+student/__pycache__/
+
+# Django migrations
+student/migrations/
+
+# Init files
+student/__init__.py
