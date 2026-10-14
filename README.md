@@ -50,8 +50,6 @@ docker run -p 8000:8000 multi-assistant
 
 ---
 
-## Demo Video
-👉 [Watch the demo video](https://drive.google.com/file/d/1_ILBwjPnxdJvAzTQcOtPVtm3dYVycALR/view?usp=sharing)
 
 ---
 
