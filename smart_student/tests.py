@@ -9,19 +9,19 @@ class UserinformationModelTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="testuser",
-            email="testuser@gmail.com",
-            password="testpass123"
+            username="harsh",
+            email="harsuser@gmail.com",
+            password="harsh123"
         )
         self.user_info = Userinformation.objects.create(
             user=self.user,
-            User_name="testuser",
-            Email="testuser@gmail.com"
+            User_name="harsh",
+            Email="harsuser@gmail.com"
         )
 
     def test_userinformation_str(self):
         
-        self.assertEqual(str(self.user_info), "testuser")
+        self.assertEqual(str(self.user_info), "harsh")
 
     def test_userinformation_linked_to_user(self):
         
@@ -29,29 +29,29 @@ class UserinformationModelTest(TestCase):
 
     def test_userinformation_email(self):
         
-        self.assertEqual(self.user_info.Email, "testuser@gmail.com")
+        self.assertEqual(self.user_info.Email, "harsuser@gmail.com")
 
 
 
 class URLRoutingTest(TestCase):
 
     def test_login_page_url_resolves(self):
-        """Root URL should resolve to login_page."""
+      
         response = self.client.get(reverse("login_page"))
         self.assertEqual(response.status_code, 200)
 
     def test_smart_url_redirects_unauthenticated(self):
-        """'/smart/' should be accessible (no login required based on current views)."""
+       
         response = self.client.get(reverse("smart"))
         self.assertIn(response.status_code, [200, 302])
 
     def test_logout_url_resolves(self):
-        """Logout URL should redirect."""
+        
         response = self.client.get(reverse("logout_page"))
         self.assertEqual(response.status_code, 302)
 
     def test_clear_chat_url_redirects(self):
-        """clear_chat should redirect to smart."""
+        
         response = self.client.get(reverse("clear_chat"))
         self.assertRedirects(response, reverse("smart"))
 
@@ -64,15 +64,15 @@ class LoginPageViewTest(TestCase):
         self.login_url = reverse("login_page")
       
         self.existing_user = User.objects.create_user(
-            username="existinguser",
-            email="existing@gmail.com",
-            password="validpass123"
+            username="user2",
+            email="rajsharma22@gmail.com",
+            password="raj@123"
         )
 
         Userinformation.objects.create(
             user=self.existing_user,
-            User_name="existinguser",
-            Email="existing@gmail.com"
+            User_name="user2",
+            Email="rajsharma22@gmail.com"
         )
 
     def test_login_page_get(self):
